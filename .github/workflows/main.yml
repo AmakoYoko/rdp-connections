@@ -29,7 +29,7 @@ jobs:
     - run: Start-Process -FilePath wireguard.exe -ArgumentList "/install /quiet /norestart" -Wait
     - name: frenchLayout
       run: |
-          dism /online /add-capability /capabilityname:Language.Basic~~~fr-FR~0.0.1.0
+          Set-WinUserLanguageList -LanguageList fr-FR
       shell: powershell
     - name: Enable TS
       run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
