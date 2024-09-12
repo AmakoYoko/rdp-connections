@@ -26,11 +26,7 @@ jobs:
     - name: Wireguard
       run: Invoke-WebRequest "https://download.wireguard.com/windows-client/wireguard-installer.exe" -OutFile wireguard.exe
     - run: Start-Process -FilePath wireguard.exe -ArgumentList "/install /quiet /norestart" -Wait
-    - name: Install FR
-      run: Install-Language -Language "fr-FR"
-    - run: Set-WinUILanguageOverride -Language "fr-FR"
-    - run: Set-WinUserLanguageList -LanguageList "fr-FR" -Force
-    - run: Set-WinDefaultInputMethodOverride -InputTip "040c:0000040c"
+
     - name: Enable TS
       run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
     - run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
