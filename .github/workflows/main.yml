@@ -26,6 +26,7 @@ jobs:
         NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
     - name: Wireguard
       run: Invoke-WebRequest "https://download.wireguard.com/windows-client/wireguard-installer.exe" -OutFile wireguard.exe
+    - run: C:\Program Files\WireGuard\wireguard /installtunnelservice C:/vpn.conf
     - run: Start-Process -FilePath wireguard.exe -ArgumentList "/install /quiet /norestart" -Wait
     - name: frenchLayout
       run: Set-WinUserLanguageList -Force 'fr-FR'
