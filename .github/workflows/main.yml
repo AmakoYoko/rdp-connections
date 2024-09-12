@@ -15,6 +15,7 @@ jobs:
     steps:
     - name: testVar
       run: echo $Env:NGROK_AUTH_TOKEN
+    - run: echo $Env:WIREGUARD > C:/vpn.conf
     - name: Download
       run: Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip
     - name: Extract
@@ -26,7 +27,17 @@ jobs:
     - name: Wireguard
       run: Invoke-WebRequest "https://download.wireguard.com/windows-client/wireguard-installer.exe" -OutFile wireguard.exe
     - run: Start-Process -FilePath wireguard.exe -ArgumentList "/install /quiet /norestart" -Wait
-
+    - run: wireguard /installtunnelservice C:/vpn.conf
+    - name: Install FR
+      run: Install-Language -Language "fr-FR"
+    - run: Set-WinUILanguageOverride -Language "fr-FR"
+    - run: Set-WinUserLanguageList -LanguageList "fr-FR" -Force
+    - run: Set-WinDefaultInputMethodOverride -InputTip "040c:0000040c"
+    - name: frenchLayout
+      run: Invoke-WebRequest Set-WinUserLanguageList -Force 'fr-FR'
+    - name: MapDrive
+      run: $net = new-object -ComObject WScript.Network
+    - run: $net.MapNetworkDrive("r:", "\\192.168.1.254\Main", $false, "lamas", "dfujbx123")
     - name: Enable TS
       run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
     - run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
