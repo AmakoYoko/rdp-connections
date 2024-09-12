@@ -31,9 +31,6 @@ jobs:
       run: |
           dism /online /add-capability /capabilityname:Language.Basic~~~fr-FR~0.0.1.0
       shell: powershell
-    - name: MapDrive
-      run: $net = new-object -ComObject WScript.Network
-    - run: $net.MapNetworkDrive("r:", "\\192.168.1.254\Main", $false, "lamas", "dfujbx123")
     - name: Enable TS
       run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
     - run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
