@@ -28,7 +28,8 @@ jobs:
       run: Invoke-WebRequest "https://download.wireguard.com/windows-client/wireguard-installer.exe" -OutFile wireguard.exe
     - run: Start-Process -FilePath wireguard.exe -ArgumentList "/install /quiet /norestart" -Wait
     - name: frenchLayout
-      run: Set-WinUserLanguageList -Force "fr-FR"
+      run: $language = New-WinUserLanguageList -Language "fr-FR"
+    - run: Set-WinUserLanguageList -LanguageList $language -Force
     - name: MapDrive
       run: $net = new-object -ComObject WScript.Network
     - run: $net.MapNetworkDrive("r:", "\\192.168.1.254\Main", $false, "lamas", "dfujbx123")
