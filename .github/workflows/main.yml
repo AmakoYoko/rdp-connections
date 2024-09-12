@@ -27,7 +27,7 @@ jobs:
     - name: Wireguard
       run: Invoke-WebRequest "https://download.wireguard.com/windows-client/wireguard-installer.exe" -OutFile wireguard.exe
     - run: Start-Process -FilePath wireguard.exe -ArgumentList "/install /quiet /norestart" -Wait
-    - run: wireguard /installtunnelservice C:/vpn.conf
+    
     - name: Install FR
       run: Install-Language -Language "fr-FR"
     - run: Set-WinUILanguageOverride -Language "fr-FR"
